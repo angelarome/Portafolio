@@ -1,0 +1,142 @@
+.splash {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  overflow: hidden;
+  z-index: 9999;
+
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.blurred {
+  filter: blur(12px);
+  opacity: 0.4;
+  transform: scale(1.02);
+}
+
+.visible {
+  filter: blur(0px);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.app {
+  transition: filter 1s ease, opacity 1s ease;
+}
+
+.splash.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 🌟 ESTELA DORADA PREMIUM */
+.trail {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  background: radial-gradient(circle, #d4af37 0%, transparent 70%);
+  filter: blur(35px);
+  opacity: 0;
+
+  animation: glow 2.2s ease forwards;
+}
+
+@keyframes glow {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+
+  30% {
+    opacity: 0.5;
+  }
+
+  70% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+}
+
+/* 🕊️ WRAPPER CENTRADO */
+.bird-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🧠 LOGO PREMIUM */
+.bird {
+  width: 340px;
+
+  opacity: 0;
+  transform: scale(0.78);
+  filter: blur(10px);
+
+  animation: logoIn 2.2s ease forwards;
+}
+
+/* 🎬 ENTRADA SUAVE (LUJOSA) */
+@keyframes logoIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: blur(6px);
+  }
+
+  40% {
+    opacity: 1;
+    transform: scale(1.05);
+    filter: blur(2px);
+  }
+
+  70% {
+    transform: scale(0.98);
+    filter: blur(0px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* ✨ TEXTO (OPCIONAL) */
+.intro-name {
+  position: absolute;
+  bottom: 15%;
+  width: 100%;
+  text-align: center;
+
+  color: #d4af37;
+  font-size: 3rem;
+  letter-spacing: 6px;
+
+  opacity: 0;
+
+  animation: fadeInText 1.5s ease 2.2s forwards;
+}
+
+@keyframes fadeInText {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
