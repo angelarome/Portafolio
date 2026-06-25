@@ -441,16 +441,16 @@ export default function Proyectos() {
               </div>
             )}
 
-            <h4
-              ref={featuresRef}
-              className={`subtitulo ${featuresVisible ? "show" : ""}`}
-            >
+            <h4 className={`subtitulo ${featuresVisible ? "show" : ""}`}>
               Características destacadas
             </h4>
 
-            <ul className={`feature-list ${featuresVisible ? "show" : ""}`}>
+            <ul
+              ref={featuresRef}
+              className={`feature-list ${featuresVisible ? "show" : ""}`}
+            >
               {proyectoActivo.funcionalidades.map((item, index) => (
-                <li key={index} style={{ transitionDelay: `${index * 0.08}s` }}>
+                <li key={index} style={{ transitionDelay: `${index * 0.09}s` }}>
                   {item}
                 </li>
               ))}

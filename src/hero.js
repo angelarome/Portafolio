@@ -19,7 +19,11 @@ export default function Hero({ ready }) {
   }, []);
 
   return (
-    <section ref={ref} className={`hero ${ready && visible ? "visible" : ""}`}>
+    <section
+      id="inicio"
+      ref={ref}
+      className={`hero ${ready && visible ? "visible" : ""}`}
+    >
       <h1>Bienvenido, soy Ángela Romero Meléndez</h1>
       <h2>Desarrolladora de páginas web y aplicaciones.</h2>
     </section>

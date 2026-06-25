@@ -1117,9 +1117,10 @@ html {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
-  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .project-preview {
@@ -1677,6 +1678,10 @@ html {
 }
 
 @media (max-width: 1100px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
   .description-carousel {
     flex-direction: column;
     align-items: center;
@@ -1911,13 +1916,13 @@ html {
   margin: 0 auto;
   padding: 5px 20px;
   position: relative;
-  top: -10px;
+
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* cuando entra en pantalla */
+/* Aparece la sección */
 #contacto.mostrar {
   opacity: 1;
   transform: translateY(0);
@@ -1935,74 +1940,57 @@ html {
   color: rgba(255, 255, 255, 0.75);
   letter-spacing: 0.3px;
 
-  position: relative;
   transition: color 0.4s ease, transform 0.4s ease;
 }
 
-/* entrada tipo Apple / Framer motion feel */
 #contacto.mostrar .contact-text {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
 }
 
-/* acento elegante (casi joya, no color plano) */
 .contact-text span {
   color: #d4af37;
   font-weight: 600;
   text-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
 }
 
-/* hover sutil (nivel portfolio real) */
 .contact-text:hover {
   color: rgba(255, 255, 255, 0.9);
   transform: translateY(-2px);
-  transition: color 0.4s ease, transform 0.4s ease;
 }
 
-/* CONTENEDOR */
+/* GRID */
 .contact-card {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
-  justify-content: center;
-}
-
-@media (max-width: 900px) {
-  .contact-card {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .contact-card {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* TARJETAS */
 .contact-item {
+  position: relative;
+
   display: flex;
   align-items: center;
   gap: 14px;
 
   padding: 18px 20px;
+
   border-radius: 18px;
 
-  min-width: unset;
-  max-width: unset;
   text-decoration: none !important;
+
+  box-sizing: border-box;
 
   height: 100%;
 }
 
-/* cuando aparece la sección */
 #contacto.mostrar .contact-item {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* delays escalonados */
 #contacto.mostrar .contact-item:nth-child(1) {
   transition-delay: 0.3s;
 }
@@ -2016,7 +2004,7 @@ html {
 }
 
 .contact-item:hover {
-  transform: translateY(-6px) scale(1.02) !important;
+  transform: translateY(-6px) scale(1.02);
 
   border-color: #d4af37;
 
@@ -2024,29 +2012,38 @@ html {
     0 0 30px rgba(212, 175, 55, 0.45);
 }
 
-/* overlay decorativo */
 .contact-item::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 24px;
+  border-radius: 18px;
 
   border: 1px solid transparent;
+
   background: linear-gradient(
     90deg,
     transparent,
     rgba(212, 175, 55, 0.3),
     transparent
   );
+
   opacity: 0;
   transition: opacity 0.2s ease;
 }
 
 .contact-item::before {
+  content: "";
+
+  width: 4px;
+  height: 100%;
+
+  border-radius: 10px;
+
+  background: linear-gradient(180deg, #d4af37, transparent);
+
   pointer-events: none;
 }
 
-/* textos internos */
 .contact-item h3 {
   margin: 0;
   font-size: 1.2rem;
@@ -2058,14 +2055,46 @@ html {
   font-size: 0.95rem;
 }
 
-/* barra decorativa */
-.contact-item::before {
-  content: "";
-  width: 4px;
-  height: 100%;
-  border-radius: 10px;
+/* TABLETS */
+@media (max-width: 900px) {
+  .contact-card {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-  background: linear-gradient(180deg, #d4af37, transparent);
+  .contact-text {
+    font-size: 1.05rem;
+  }
+}
+
+/* CELULARES */
+@media (max-width: 600px) {
+  #contacto {
+    padding: 0 15px;
+  }
+
+  .contact-card {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .contact-item {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .contact-item h3 {
+    font-size: 1.05rem;
+  }
+
+  .contact-item span {
+    font-size: 0.9rem;
+  }
+
+  .contact-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
 }
 
 /* línea del título */
