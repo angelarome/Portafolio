@@ -9,8 +9,15 @@
   transition: opacity 0.8s ease;
 }
 
+.bird,
+.splash {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
 .blurred {
-  filter: blur(12px);
+  filter: blur(6px);
   opacity: 0.4;
   transform: scale(1.02);
 }
@@ -22,12 +29,13 @@
 }
 
 .app {
-  transition: filter 1s ease, opacity 1s ease;
+  transition: filter 1s ease, opacity 1s ease, transform 1s ease;
 }
 
 .splash.hide {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 1.2s ease;
 }
 
 /* 🌟 ESTELA DORADA PREMIUM */
@@ -41,8 +49,10 @@
   transform: translate(-50%, -50%);
 
   background: radial-gradient(circle, #d4af37 0%, transparent 70%);
-  filter: blur(35px);
+  filter: blur(20px);
   opacity: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 
   animation: glow 2.2s ease forwards;
 }
@@ -82,7 +92,7 @@
 
   opacity: 0;
   transform: scale(0.78);
-  filter: blur(10px);
+  filter: blur(4px);
 
   animation: logoIn 2.2s ease forwards;
 }
@@ -91,13 +101,13 @@
 @keyframes logoIn {
   0% {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
     filter: blur(6px);
   }
 
   40% {
     opacity: 1;
-    transform: scale(1.05);
+    transform: scale(1.02);
     filter: blur(2px);
   }
 
@@ -138,5 +148,35 @@
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes mobileLogo {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .bird {
+    width: 230px;
+    animation: mobileLogo 1.8s ease forwards;
+  }
+
+  .trail {
+    width: 220px;
+    height: 220px;
+    filter: blur(14px);
+  }
+
+  .intro-name {
+    font-size: 2rem;
+    letter-spacing: 4px;
   }
 }

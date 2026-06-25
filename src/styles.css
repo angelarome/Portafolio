@@ -28,13 +28,6 @@ html {
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
-
-  scroll-snap-type: y mandatory;
-}
-
-section {
-  scroll-snap-align: start;
-  min-height: 100vh;
 }
 
 .hero,
@@ -43,8 +36,6 @@ section {
 #proyectos,
 #contacto {
   min-height: 100vh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 
   display: flex;
   flex-direction: column;
@@ -175,6 +166,63 @@ section {
 
 .nav-links a:hover::after {
   width: 80%;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    width: 95%;
+    padding: 12px 18px;
+    top: 10px;
+    border-radius: 14px;
+  }
+
+  .nav-links {
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+  }
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff2a8;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+
+    padding: 20px;
+
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(20px);
+
+    border-radius: 15px;
+    gap: 20px;
+    align-items: center;
+  }
 }
 
 .hero h1,
@@ -630,8 +678,8 @@ section {
   position: relative;
 
   opacity: 0;
-  transform: translateY(60px);
-
+  transform: translateY(-50px);
+  padding-top: 15px;
   transition: all 0.8s ease;
 }
 
@@ -670,7 +718,8 @@ section {
   position: relative;
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .categoria.show {
@@ -766,8 +815,8 @@ section {
   opacity: 0;
   transform: translateY(35px) scale(0.95);
 
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tech:hover {
@@ -787,7 +836,6 @@ section {
 .tech.show {
   opacity: 1;
   transform: translateY(0) scale(1);
-  transition-delay: 0ms !important;
 }
 
 .tech-icon {
@@ -900,6 +948,20 @@ section {
   animation: shineMove 0.9s ease forwards;
 }
 
+@media (max-width: 768px) {
+  .categoria {
+    transform: translateY(15px);
+  }
+
+  .letter {
+    transform: translateY(-5px);
+  }
+
+  .tech {
+    transform: translateY(20px) scale(0.98);
+  }
+}
+
 @keyframes shineMove {
   0% {
     left: -80%;
@@ -944,10 +1006,59 @@ section {
   }
 }
 
+.categoria,
+.letter,
+.tech,
+.tech-icon {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
 #proyectos {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: -100px;
+}
+
+@media (max-width: 992px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .project-preview {
+    width: 100%;
+  }
+
+  .project-preview img {
+    height: 200px;
+  }
+
+  #proyectos {
+    margin-top: -40px;
+  }
+
+  .project-preview {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .project-preview img {
+    height: 280px;
+    object-fit: cover;
+  }
 }
 
 .titulo_proyect {
@@ -1006,7 +1117,8 @@ section {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+  justify-content: center;
   gap: 30px;
 }
 
@@ -1121,7 +1233,7 @@ section {
 
 .project-preview img {
   width: 100%;
-  height: 220px;
+  height: 320px;
   object-fit: cover;
 
   transform: scale(1.05);
@@ -1226,7 +1338,8 @@ section {
 }
 
 .project-description {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   flex-shrink: 0;
 
   background: rgba(255, 255, 255, 0.03);
@@ -1303,10 +1416,11 @@ section {
 
   position: relative;
   opacity: 0;
-  transform: translateY(25px);
+  transform: translateY(0);
   filter: blur(4px);
 
   transition: all 0.7s ease;
+  margin-top: 30px;
 }
 
 .subtitulo.show {
@@ -1416,8 +1530,8 @@ section {
 }
 
 .carousel-wrapper {
-  width: 600px;
-  height: 380px;
+  width: 750px;
+  height: 480px;
 
   position: relative;
   perspective: 1500px;
@@ -1474,7 +1588,7 @@ section {
   height: 100%;
   border-radius: 20px;
   transition: all 0.5s ease;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
   object-fit: contain;
 }
 
@@ -1488,10 +1602,11 @@ section {
 
 .web-frame {
   max-width: 100%;
-  max-height: 250px;
-
-  object-fit: contain;
+  max-height: 380px;
+  position: relative;
+  top: -30px;
 }
+
 /* CENTRO (principal) */
 .pos-0 {
   transform: translateX(0) scale(1.05);
@@ -1504,13 +1619,6 @@ section {
   filter: brightness(0.7);
 }
 
-/* IZQUIERDA */
-.pos-1 {
-  transform: translateX(-120px) scale(0.85) rotateY(25deg);
-  z-index: 2;
-  opacity: 0.6;
-}
-
 .carousel-btn.left {
   left: -60px;
 }
@@ -1519,19 +1627,16 @@ section {
   right: -60px;
 }
 
-/* DERECHA */
-.pos--1 {
-  transform: translateX(120px) scale(0.85) rotateY(-25deg);
-  z-index: 2;
-  opacity: 0.6;
-}
-
 .description-carousel {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   gap: 65px;
   transform: translateY(-55px);
+}
+
+.web-frame + .carousel-dots {
+  margin-top: -70px;
 }
 
 .carousel-dots {
@@ -1578,6 +1683,14 @@ section {
     gap: 20px;
   }
 
+  .project-description {
+    width: 100%;
+    max-width: 100%;
+    padding: 18px;
+    margin-top: 50px;
+    border-radius: 15px;
+  }
+
   .project-carousel {
     flex: 1;
     width: 100%;
@@ -1586,17 +1699,14 @@ section {
 
   .carousel-wrapper {
     width: 100%;
-    max-width: 320px;
-    height: auto;
+    max-width: 950px; /* 🔥 antes 800px */
     aspect-ratio: 4 / 3;
   }
 
   .web-frame {
     width: 100%;
-    max-width: 320px;
-    max-height: 220px;
+    height: 100%;
     margin: 0 auto;
-    object-fit: contain;
   }
 
   .carousel-btn.left {
@@ -1613,14 +1723,31 @@ section {
     z-index: 100;
   }
 
-  .web-frame .carousel-btn.left {
-    left: -25px;
+  .mobile-frame {
+    width: 200px;
+    height: 400px;
+
+    object-fit: contain;
+    margin: auto;
+  }
+
+  .mobile-frame .carousel-btn.left {
+    left: -45px;
+  }
+
+  .mobile-frame .carousel-btn.right {
+    right: -45px;
   }
 
   .web-frame .carousel-btn.right {
-    right: -25px;
+    right: -45px;
+  }
+
+  .web-frame .carousel-btn.left {
+    left: -45px;
   }
 }
+
 .testimonial {
   margin: 40px 0;
   padding: 28px;
@@ -1778,15 +1905,16 @@ section {
 }
 
 #contacto {
+  scroll-margin-top: 100px;
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 120px 20px;
-
+  padding: 5px 20px;
+  position: relative;
+  top: -10px;
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(10px);
   transition: opacity 0.8s ease, transform 0.8s ease;
-  scroll-snap-align: center;
 }
 
 /* cuando entra en pantalla */

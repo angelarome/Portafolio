@@ -1,5 +1,4 @@
 import "./styles.css";
-import logo from "./assets/logo.png";
 import { useEffect, useState } from "react";
 import SplashScreen from "./components/SplashScreen";
 import SobreMi from "./sobremi.js";
@@ -7,6 +6,7 @@ import Hero from "./hero.js";
 import Tecnologias from "./tecnologias.js";
 import Proyectos from "./proyectos.js";
 import Contacto from "./contacto.js";
+import Navbar from "./menu";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -30,22 +30,12 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // 📍 posición del logo real
 
   return (
     <>
       {loading && <SplashScreen fadeOut={fadeOut} />}
       <div className={`app ${ready ? "ready" : ""}`}>
-        <nav className="navbar">
-          <img id="main-logo" className="logo" src={logo} />
-
-          <div className="nav-links">
-            <a href="#sobre-mi">Sobre mí</a>
-            <a href="#tecnologias">Tecnologías</a>
-            <a href="#proyectos">Proyectos</a>
-            <a href="#contacto">Contacto</a>
-          </div>
-        </nav>
+        <Navbar />
 
         <Hero ready={ready} />
 
