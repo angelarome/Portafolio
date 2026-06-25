@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1eebb422.css",
+    "main.js": "/static/js/main.b54dc043.js",
+    "static/media/boletazo2.jpeg": "/static/media/boletazo2.0f39dfabdb006e5cc9d5.jpeg",
+    "static/media/LOGO-HELICONIAS.jpeg": "/static/media/LOGO-HELICONIAS.84f70df4b19763f4cdee.jpeg",
+    "static/media/logo.png": "/static/media/logo.5839f5756e9270ea0291.png",
+    "static/media/boletazo4.jpeg": "/static/media/boletazo4.d51efc8a94fae0c0d521.jpeg",
+    "static/media/boletazo3.jpeg": "/static/media/boletazo3.2c23ecbe51d9a655f777.jpeg",
+    "static/media/prestaap4.jpeg": "/static/media/prestaap4.637dfa9734c94efcc07f.jpeg",
+    "static/media/prestaap8.jpeg": "/static/media/prestaap8.e7cf23b567fa9ab5de9f.jpeg",
+    "static/media/prestaap2.jpeg": "/static/media/prestaap2.bcace53c64f45947c6df.jpeg",
+    "static/media/prestaap6.jpeg": "/static/media/prestaap6.93e83bff40794add149f.jpeg",
+    "static/media/boletazo6.jpeg": "/static/media/boletazo6.93f15b9f901d564980c8.jpeg",
+    "static/media/boletazo9.jpeg": "/static/media/boletazo9.184af4c0f2e6aec3bb77.jpeg",
+    "static/media/prestaap3.jpeg": "/static/media/prestaap3.8cb3ab95565b66ac0346.jpeg",
+    "static/media/boletazo5.jpeg": "/static/media/boletazo5.9f53da4ca25b60f1a89b.jpeg",
+    "static/media/boletazo1.jpeg": "/static/media/boletazo1.8b8895595d4e8c25d574.jpeg",
+    "static/media/heliconiasreport2.jpeg": "/static/media/heliconiasreport2.75082fb867b62f908e76.jpeg",
+    "static/media/preestaap1.jpeg": "/static/media/preestaap1.144a93ed8a6b1a5ad743.jpeg",
+    "static/media/heliconiasreport1.jpeg": "/static/media/heliconiasreport1.9a5478b42f3e33cfb119.jpeg",
+    "static/media/logo-boletazo.png": "/static/media/logo-boletazo.28c721b98725445cb778.png",
+    "static/media/heliconiasreport3.jpeg": "/static/media/heliconiasreport3.08a48626def0fc825633.jpeg",
+    "static/media/logo-prestaap.png": "/static/media/logo-prestaap.96c5378b04eddb90dc26.png",
+    "index.html": "/index.html",
+    "main.1eebb422.css.map": "/static/css/main.1eebb422.css.map",
+    "main.b54dc043.js.map": "/static/js/main.b54dc043.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1eebb422.css",
+    "static/js/main.b54dc043.js"
+  ]
+}
