@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1eebb422.css",
-    "main.js": "/static/js/main.b54dc043.js",
+    "main.css": "/static/css/main.4954f372.css",
+    "main.js": "/static/js/main.16b3636b.js",
     "static/media/boletazo2.jpeg": "/static/media/boletazo2.0f39dfabdb006e5cc9d5.jpeg",
     "static/media/LOGO-HELICONIAS.jpeg": "/static/media/LOGO-HELICONIAS.84f70df4b19763f4cdee.jpeg",
     "static/media/logo.png": "/static/media/logo.5839f5756e9270ea0291.png",
@@ -23,11 +23,11 @@
     "static/media/heliconiasreport3.jpeg": "/static/media/heliconiasreport3.08a48626def0fc825633.jpeg",
     "static/media/logo-prestaap.png": "/static/media/logo-prestaap.96c5378b04eddb90dc26.png",
     "index.html": "/index.html",
-    "main.1eebb422.css.map": "/static/css/main.1eebb422.css.map",
-    "main.b54dc043.js.map": "/static/js/main.b54dc043.js.map"
+    "main.4954f372.css.map": "/static/css/main.4954f372.css.map",
+    "main.16b3636b.js.map": "/static/js/main.16b3636b.js.map"
   },
   "entrypoints": [
-    "static/css/main.1eebb422.css",
-    "static/js/main.b54dc043.js"
+    "static/css/main.4954f372.css",
+    "static/js/main.16b3636b.js"
   ]
 }
