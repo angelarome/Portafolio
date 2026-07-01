@@ -64,7 +64,7 @@ function Contacto() {
         </a>
 
         <a
-          href="www.linkedin.com/in/angela-tatiana-romero-melendez-3b5690385"
+          href="https://www.linkedin.com/in/angela-tatiana-romero-melendez-3b5690385"
           target="_blank"
           rel="noopener noreferrer"
           className={`contact-item ${visible ? "show" : ""}`}
