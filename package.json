@@ -1,0 +1,25 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "node node_modules/react-scripts/bin/react-scripts.js build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "ajv-keywords": "^5.1.0"
+  }
+}
