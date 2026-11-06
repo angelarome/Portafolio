@@ -1685,6 +1685,13 @@ html {
     height: 280px;
     object-fit: cover;
   }
+
+  .project-carousel {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    display: block !important;
+  }
 }
 
 /* ==============================
