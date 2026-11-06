@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import SplashScreen from "./components/SplashScreen";
 import SobreMi from "./sobremi.js";
 import Hero from "./hero.js";
+import Certificaciones from "./certificaciones.js";
 import Tecnologias from "./tecnologias.js";
 import Proyectos from "./proyectos.js";
 import Contacto from "./contacto.js";
@@ -30,7 +31,6 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
-
   return (
     <>
       {loading && <SplashScreen fadeOut={fadeOut} />}
@@ -40,6 +40,7 @@ export default function App() {
         <Hero ready={ready} />
 
         <SobreMi />
+        <Certificaciones />
         <Tecnologias />
         <Proyectos />
 

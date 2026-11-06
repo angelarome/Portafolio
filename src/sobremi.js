@@ -1,5 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import "./styles.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  faCode,
+  faLaptopCode,
+  faServer,
+  faMobileScreenButton,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function SobreMi() {
   const ref = useRef(null);
@@ -14,7 +22,7 @@ export default function SobreMi() {
           setVisible(false);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.3 }
     );
 
     if (ref.current) observer.observe(ref.current);
@@ -22,39 +30,32 @@ export default function SobreMi() {
     return () => observer.disconnect();
   }, []);
 
-  function Dato({ titulo, subtitulo, index }) {
+  function Dato({ titulo, subtitulo, index, icono }) {
     const ref = useRef(null);
     const [visible, setVisible] = useState(false);
-
     useEffect(() => {
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) {
-            setVisible(true);
-          }
+          setVisible(entry.isIntersecting);
         },
-        {
-          threshold: 0.2,
-        }
+        { threshold: 0.2 }
       );
-
       if (ref.current) observer.observe(ref.current);
-
       return () => observer.disconnect();
     }, []);
-
     return (
       <div
         ref={ref}
         className={`dato ${visible ? "visible" : ""}`}
         style={{ transitionDelay: `${index * 0.15}s` }}
       >
-        <h3>{titulo}</h3>
-        <span>{subtitulo}</span>
+        {" "}
+        <i className={icono}></i>{" "}
+        <FontAwesomeIcon icon={icono} className="dato-icono" />{" "}
+        <h3>{titulo}</h3> <span>{subtitulo}</span>{" "}
       </div>
     );
   }
-
   return (
     <section id="sobre-mi" ref={ref}>
       <h2 className={`titulo ${visible ? "show" : ""}`}>Sobre mí</h2>
@@ -62,28 +63,45 @@ export default function SobreMi() {
       <div className="sobre-contenido">
         <div className={`sobre-texto ${visible ? "show" : ""}`}>
           <p>
-            Soy Tecnóloga en Desarrollo de Software, actualmente con derecho a
-            grado, con experiencia en el desarrollo de aplicaciones web y
-            móviles. Me apasiona crear soluciones tecnológicas que resuelvan
-            problemas reales y aporten valor a las personas.
+            Soy Tecnóloga en Desarrollo de Software, graduada de la Universidad del Valle. Cuento con experiencia práctica en el desarrollo de aplicaciones móviles y plataformas web, participando en la creación de soluciones tecnológicas orientadas a necesidades reales.
+          </p>
+          <p>
+            He trabajado en proyectos independientes y profesionales, abordando diferentes etapas del desarrollo de software: análisis de requerimientos, desarrollo frontend y backend, integración de APIs, gestión de bases de datos e implementación de funcionalidades.
           </p>
 
           <p>
-            He participado en proyectos frontend y backend, trabajando con bases
-            de datos, APIs y sistemas de gestión. Me caracterizo por la
-            disciplina, la responsabilidad y el aprendizaje continuo.
+            Me caracterizo por mi pensamiento analítico, capacidad para identificar y resolver problemas, aprendizaje continuo y responsabilidad. Busco aportar mis conocimientos al desarrollo de soluciones eficientes que optimicen procesos y generen valor para las organizaciones.
           </p>
         </div>
 
         <div className="sobre-datos">
-          <Dato index={0} titulo="+1 año" subtitulo="Experiencia" />
-          <Dato index={1} titulo="Frontend" subtitulo="Interfaces modernas" />
+          <Dato
+            index={0}
+            icono={faCode}
+            titulo="+1 año"
+            subtitulo="Experiencia en desarrollo de software"
+          />
+
+          <Dato
+            index={1}
+            icono={faLaptopCode}
+            titulo="Frontend"
+            subtitulo="Diseño y desarrollo de interfaces web"
+          />
+
           <Dato
             index={2}
+            icono={faServer}
             titulo="Backend"
-            subtitulo="APIs y lógica de negocio"
+            subtitulo="APIs REST, servicios y bases de datos"
           />
-          <Dato index={3} titulo="Mobile" subtitulo="Android developer" />
+
+          <Dato
+            index={3}
+            icono={faMobileScreenButton}
+            titulo="Mobile"
+            subtitulo="Desarrollo de aplicaciones Android"
+          />
         </div>
       </div>
     </section>

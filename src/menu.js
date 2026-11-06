@@ -17,6 +17,7 @@ export default function Navbar() {
         <a href="#inicio">Inicio</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#tecnologias">Tecnologías</a>
+        <a href="#certificaciones">Certificaciones</a>
         <a href="#proyectos">Proyectos</a>
         <a href="#contacto">Contacto</a>
       </div>

@@ -61,7 +61,9 @@ export default function Tecnologias() {
         className={`tech ${visible ? "show" : ""}`}
         style={{ transitionDelay: `${index * 0.05}s` }}
       >
-        <img src={icon} />
+        <div className="tech-icon">
+          <img src={icon} alt={name} />
+        </div>
         <p>{name}</p>
       </div>
     );
@@ -89,7 +91,7 @@ export default function Tecnologias() {
 
   return (
     <section id="tecnologias" ref={ref} className={visible ? "visible" : ""}>
-      <AnimatedTitle text="Tecnologías" visible={visible} />
+      <AnimatedTitle text="Desarrollo web y móvil" visible={visible} />
       <div className="grid">
         <TechCard icon="/icons/python.svg" name="Python" index={0} />
         <TechCard icon="/icons/flutter.svg" name="Flutter" index={1} />
@@ -100,7 +102,7 @@ export default function Tecnologias() {
         <TechCard icon="/icons/css.svg" name="CSS" index={6} />
       </div>
 
-      <AnimatedTitle text="Backend / Cloud" visible={visible} />
+      <AnimatedTitle text="Backend, bases de datos y cloud" visible={visible} />
 
       <div className="grid">
         <TechCard icon="/icons/flask.svg" name="Flask" index={7} />
@@ -112,23 +114,45 @@ export default function Tecnologias() {
         <TechCard icon="/icons/postgresql.svg" name="PostgreSQL" index={13} />
       </div>
 
-      <AnimatedTitle text="Herramientas" visible={visible} />
+      <AnimatedTitle text="APIs e integraciones" visible={visible} />
+      <div className="grid">
+        <TechCard icon="/icons/api1.svg" name="REST APIs" index={14} />
+        <TechCard icon="/icons/mapa.png" name="Google Maps API" index={15} />
+        <TechCard
+          icon="/icons/google-drive.svg"
+          name="Google Drive API"
+          index={16}
+        />
+        <TechCard icon="/icons/enviar1.svg" name="Brevo Email API" index={17} />
+        <TechCard
+          icon="/icons/firebase.svg"
+          name="Firebase Authentication"
+          index={18}
+        />
+        <TechCard
+          icon="/icons/pin-seguridad.png"
+          name="OpenRouteService API"
+          index={19}
+        />
+      </div>
+
+      <AnimatedTitle text="Herramientas de desarrollo" visible={visible} />
       <div className="grid">
         <TechCard
           icon="/icons/visual-studio-code.svg"
           name="VS Code"
-          index={14}
+          index={20}
         />
-        <TechCard icon="/icons/github.svg" name="GitHub" index={15} />
-        <TechCard icon="/icons/git.svg" name="Git" index={16} />
-        <TechCard icon="/icons/trello.svg" name="Trello" index={17} />
+        <TechCard icon="/icons/github.svg" name="GitHub" index={21} />
+        <TechCard icon="/icons/git.svg" name="Git" index={22} />
+        <TechCard icon="/icons/trello.svg" name="Trello" index={23} />
       </div>
 
       <AnimatedTitle text="Diseño" visible={visible} />
       <div className="grid">
-        <TechCard icon="/icons/figma.svg" name="Figma" index={18} />
-        <TechCard icon="/icons/devicon--canva.svg" name="Canva" index={19} />
-        <TechCard icon="/icons/photoshop.svg" name="Photoshop" index={20} />
+        <TechCard icon="/icons/figma.svg" name="Figma" index={24} />
+        <TechCard icon="/icons/devicon--canva.svg" name="Canva" index={25} />
+        <TechCard icon="/icons/photoshop.svg" name="Photoshop" index={26} />
       </div>
     </section>
   );

@@ -1,25 +1,18 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import heliconias from "./assets/heliconiasreport1.jpeg";
 import heliconia2 from "./assets/heliconiasreport2.jpeg";
 import heliconia3 from "./assets/heliconiasreport3.jpeg";
-import prestaap from "./assets/preestaap1.jpeg";
-import prestaap1 from "./assets/prestaap2.jpeg";
-import prestaap2 from "./assets/prestaap3.jpeg";
-import prestaap3 from "./assets/prestaap4.jpeg";
-import prestaap4 from "./assets/prestaap6.jpeg";
-import prestaap5 from "./assets/prestaap8.jpeg";
-import prestaap6 from "./assets/prestaap6.jpeg";
 import logoheliconias from "./assets/LOGO-HELICONIAS.jpeg";
-import prestaaplogo from "./assets/logo-prestaap.png";
-import logoboletazo from "./assets/logo-boletazo.png";
-import boletazo1 from "./assets/boletazo1.jpeg";
-import boletazo2 from "./assets/boletazo2.jpeg";
-import boletazo3 from "./assets/boletazo3.jpeg";
-import boletazo4 from "./assets/boletazo4.jpeg";
-import boletazo5 from "./assets/boletazo5.jpeg";
-import boletazo6 from "./assets/boletazo6.jpeg";
-import boletazo9 from "./assets/boletazo9.jpeg";
-import prestaappro from "./assets/prestaap-pro.png";
+import logoboletazo from "./assets/sorteapro.png";
+import boletazo1 from "./assets/sorteapro1.jpeg";
+import boletazo2 from "./assets/sorteapro2.jpeg";
+import boletazo3 from "./assets/sorteapro3.jpeg";
+import boletazo4 from "./assets/sorteapro4.jpeg";
+import boletazo5 from "./assets/sorteapro5.jpeg";
+import boletazo8 from "./assets/sorteapro8.jpeg";
+import boletazo7 from "./assets/sorteapro7.jpeg";
+import prestaappro from "./assets/cobropro.png";
 import prestaappro1 from "./assets/prestaappro1.jpeg";
 import prestaappro2 from "./assets/prestaappro2.jpeg";
 import prestaappro3 from "./assets/prestaappro3.jpeg";
@@ -31,6 +24,7 @@ import prestaappro7 from "./assets/prestaappro7.jpeg";
 export default function Proyectos() {
   const [proyectoActivo, setProyectoActivo] = useState(null);
   const [indexImagen, setIndexImagen] = useState(0);
+  const [visorAbierto, setVisorAbierto] = useState(false);
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
   const detalleRef = useRef(null);
@@ -50,51 +44,31 @@ export default function Proyectos() {
   const testimonialRef = useRef(null);
   const [testimonialVisible, setTestimonialVisible] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTestimonialVisible(true);
-        } else {
-          setTestimonialVisible(false);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (testimonialRef.current) {
-      observer.observe(testimonialRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [proyectoActivo]);
+  const [videoAbierto, setVideoAbierto] = useState(false);
+  const [videoActivo, setVideoActivo] = useState(null);
 
   useEffect(() => {
-    if (!carouselRef.current) return;
+    const elemento = ref.current;
+
+    if (!elemento) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setCarouselVisible(true);
-        } else {
-          setCarouselVisible(false);
-        }
+        setVisible(entry.isIntersecting);
       },
-      { threshold: 0.3 }
+      { threshold: 0.05 }
     );
 
-    observer.observe(carouselRef.current);
+    observer.observe(elemento);
 
     return () => observer.disconnect();
-  }, [proyectoActivo]);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
-        } else {
-          setVisible(false);
         }
       },
       { threshold: 0.1 }
@@ -144,24 +118,68 @@ export default function Proyectos() {
     return () => clearTimeout(timer);
   }, [proyectoActivo]);
 
+  useEffect(() => {
+    const elemento = testimonialRef.current;
+
+    if (!elemento) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setTestimonialVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    observer.observe(elemento);
+
+    return () => observer.disconnect();
+  }, [proyectoActivo]);
+
   const proyectos = [
     {
       id: 1,
       tipo: "web",
       nombre: "Heliconias Report",
+      resumen:
+        "Plataforma web para gestionar visitantes, consultar estadísticas y generar informes automáticamente.",
       imagen: logoheliconias,
 
-      imagenes: [heliconias, heliconia2, heliconia3],
+      imagenes: [heliconia3, heliconia2, heliconias],
+      descripcionesImagenes: [
+        {
+          titulo: "Panel principal y resumen estadístico",
+          descripcion:
+            "Página principal de la plataforma después del inicio de sesión, con tarjetas informativas que presentan un resumen de las estadísticas y métricas principales para consultar rápidamente la actividad registrada.",
+        },
+        {
+          titulo: "Distribución de visitantes por ciudad",
+          descripcion:
+            "Visualización estadística de la procedencia de los visitantes mediante gráficos de barras, que permiten identificar y comparar las ciudades con mayor número de visitantes.",
+        },
+        {
+          titulo: "Estadísticas de reservas individuales y grupales",
+          descripcion:
+            "Consulta y comparación de las reservas individuales y grupales mediante gráficos circulares, facilitando el análisis de la distribución de las reservas.",
+        },
+      ],
 
       descripcion:
         "Desarrollo de una plataforma web de inteligencia de datos para el Parque de las Heliconias, enfocada en la gestión, análisis y generación de reportes estadísticos sobre sus visitantes. Proyecto desarrollado en equipo, con enfoque en la optimización del manejo de datos y la automatización de reportes.",
 
-      testimonio: {
-        titulo: "Opinión del cliente",
-        estrellas: 5,
-        comentario:
-          "Antes manejábamos toda la información en papel y era muy fácil perder datos o demorarnos buscando registros. Con esta plataforma todo está centralizado, se puede consultar rápidamente y ya no dependemos de hojas de Excel ni de conteos manuales. Nos ha ahorrado mucho tiempo en el proceso.",
-        autor: "Administrador del Parque de las Heliconias",
+      repositorio:
+        "https://github.com/codigoabiertoceron123-wq/heliconias2.2.git",
+
+      problemaSolucion: {
+        problema:
+          "La información de los visitantes y las reservas se registraba manualmente en archivos de Excel y cuadernos. Este proceso exigía ingresar y organizar grandes cantidades de datos para elaborar estadísticas, dificultaba las consultas y representaba un riesgo de pérdida de información.",
+
+        solucion:
+          "Se desarrolló en equipo una plataforma web compuesta por tres módulos para centralizar la gestión de la información. Mi participación se enfocó en el módulo de estadísticas, encargado de consultar los datos almacenados en la base de datos y transformarlos en gráficos e indicadores para analizar la actividad de los visitantes y las reservas.",
+
+        beneficio:
+          "La información de las reservas queda almacenada y disponible para su análisis, evitando tener que recopilar manualmente los registros para elaborar estadísticas. Esto facilita las consultas, permite identificar tendencias y agiliza la generación de reportes para la toma de decisiones.",
       },
 
       funcionalidades: [
@@ -184,79 +202,12 @@ export default function Proyectos() {
         { nombre: "GitHub", icono: "/icons/github.svg" },
       ],
     },
-
     {
       id: 2,
       tipo: "movil",
-      nombre: "Prestaap",
-      imagen: prestaaplogo,
-
-      imagenes: [
-        prestaap,
-        prestaap1,
-        prestaap2,
-        prestaap3,
-        prestaap4,
-        prestaap5,
-        prestaap6,
-      ],
-
-      descripcion:
-        "Aplicación móvil desarrollada en Flutter orientada a la administración de negocios que requieren control de clientes y operaciones financieras. Incluye gestión de registros, seguimiento de pagos, facturación digital, control de ingresos y gastos, estadísticas y almacenamiento local con SQLite para garantizar el funcionamiento sin conexión a internet.",
-      testimonio: {
-        titulo: "Opinión del cliente",
-        estrellas: 5,
-        comentario:
-          "La aplicación es muy fácil de usar e intuitiva, lo que hace que cualquier persona pueda adaptarse rápidamente sin necesidad de mucha capacitación. Nos ha permitido llevar un mejor control de los préstamos, sin pérdida de datos y con toda la información organizada. Además, ahora podemos ver estadísticas en tiempo real, lo que antes tomaba mucho tiempo calcular manualmente. En general, nos ha ahorrado bastante tiempo en la gestión diaria.",
-        autor: "Cliente de Prestaap",
-      },
-
-      funcionalidades: [
-        "Registro e inicio de sesión con Firebase",
-        "Recuperación de contraseña",
-        "Protección mediante PIN y huella biométrica",
-        "Gestión de clientes y préstamos",
-        "Creación de múltiples préstamos por cliente",
-        "Seguimiento automático de cuotas",
-        "Identificación de clientes atrasados y pagos pendientes",
-        "Seguimiento de pagos del día y próximos vencimientos",
-        "Recordatorios de cobro mediante WhatsApp",
-        "Marcación telefónica automática desde la aplicación",
-        "Generación de facturas digitales en imagen",
-        "Historial de facturas con búsqueda y reenvío",
-        "Control de ingresos, gastos y caja",
-        "Registro y administración de gastos",
-        "Retiros de dinero de caja",
-        "Cálculo automático del saldo disponible",
-        "Análisis semanal, mensual y anual",
-        "Consultas por rango de fechas",
-        "Edición del perfil y configuración financiera",
-        "Exportación e importación de la base de datos",
-        "Copias de seguridad en Google Drive",
-        "Funcionamiento sin conexión a internet",
-        "Visualización de clientes en mapas sin conexión a internet",
-        "Geolocalización automática de clientes mediante dirección ingresada",
-        "Conversión de direcciones a coordenadas mediante APIs de geocodificación",
-        "Marcadores personalizados para identificar el estado de cada cliente",
-        "Clasificación visual de clientes en el mapa según estado de pago (al día, vence hoy y atrasado)",
-        "Consulta de ubicación de clientes para facilitar rutas de cobro",
-      ],
-
-      tecnologias: [
-        { nombre: "Flutter", icono: "/icons/flutter.svg" },
-        { nombre: "Dart", icono: "/icons/logos--dart.svg" },
-        { nombre: "Firebase", icono: "/icons/firebase.svg" },
-        { nombre: "SQLite", icono: "/icons/sqlite.svg" },
-        { nombre: "Python", icono: "/icons/python.svg" },
-        { nombre: "MySQL", icono: "/icons/mysql.svg" },
-        { nombre: "Google Drive API", icono: "/icons/google-drive.svg" },
-      ],
-    },
-
-    {
-      id: 3,
-      tipo: "movil",
-      nombre: "Prestaap Pro",
+      nombre: "CobroPro",
+      resumen:
+        "Solución móvil para gestionar negocios, equipos de trabajo, clientes, cobranzas y rutas mediante mapas inteligentes y sincronización en la nube.",
       imagen: prestaappro,
 
       imagenes: [
@@ -269,6 +220,44 @@ export default function Proyectos() {
         prestaappro7,
       ],
 
+      descripcionesImagenes: [
+        {
+          titulo: "Gestión diaria de cobros y clientes",
+          descripcion:
+            "Panel de seguimiento que permite visualizar cobros del día, cuotas atrasadas, pagos realizados y próximos vencimientos. Facilita el registro de pagos y la comunicación directa con los clientes mediante WhatsApp o llamadas telefónicas con un solo toque.",
+        },
+        {
+          titulo: "Registro inteligente de clientes",
+          descripcion:
+            "Permite registrar nuevos clientes, guardar automáticamente su ubicación mediante GPS y calcular las cuotas de los préstamos según el porcentaje de interés configurado por el usuario.",
+        },
+        {
+          titulo: "Administración e historial financiero de clientes",
+          descripcion:
+            "Consulta y actualización de datos personales, teléfonos y direcciones, junto con el historial de préstamos y movimientos financieros de cada cliente. Incluye captura de ubicación mediante GPS.",
+        },
+        {
+          titulo: "Administración y seguimiento de trabajadores",
+          descripcion:
+            "Permite gestionar trabajadores, activar o desactivar cuentas, establecer comunicación directa y consultar estadísticas individuales de clientes, préstamos y productividad.",
+        },
+        {
+          titulo: "Dashboard y control financiero del negocio",
+          descripcion:
+            "Panel administrativo con información sobre caja disponible, ingresos, gastos y comportamiento general del negocio. Presenta indicadores de clientes al día, atrasados y pendientes de cobro.",
+        },
+        {
+          titulo: "Análisis de préstamos y recaudos",
+          descripcion:
+            "Visualización gráfica del comportamiento financiero durante los últimos siete días, incluyendo valores de préstamos realizados y recaudos obtenidos para facilitar el seguimiento del negocio.",
+        },
+        {
+          titulo: "Gestión y planificación de rutas de cobro",
+          descripcion:
+            "Mapa interactivo con la ubicación de los clientes y sus respectivos estados de pago. Permite filtrar clientes por cobros del día, atrasados, pendientes de inicio y todos, facilitando la planificación de recorridos y visitas de cobranza.",
+        },
+      ],
+
       descripcion:
         "Aplicación móvil profesional para la gestión y administración de negocios desarrollada en Flutter. Permite controlar clientes, operaciones financieras, pagos, facturación, caja, gastos y equipos de trabajo. Incluye mapas inteligentes, rutas de gestión, estadísticas avanzadas, sincronización en la nube y herramientas diseñadas para optimizar los procesos diarios de una empresa.",
       testimonio: {
@@ -276,7 +265,20 @@ export default function Proyectos() {
         estrellas: 5,
         comentario:
           "Desde que usamos la aplicación hemos podido organizar mucho mejor nuestro trabajo diario. Es rápida y práctica, ya no tenemos que perder tiempo buscando información porque todo está en un solo lugar. La función del mapa nos ayuda a encontrar clientes fácilmente y optimizar las rutas, permitiéndonos aprovechar mejor el tiempo durante las jornadas de trabajo.",
-        autor: "Cliente de Prestaap Pro",
+        autor: "Cliente de CobroPro",
+      },
+
+      videoDemo: "/videos/cobroprovideo.mp4",
+
+      problemaSolucion: {
+        problema:
+          "Administrar rifas mediante listas en papel o registros manuales puede dificultar el control de números, encargos y participantes. También hace más complicado consultar información anterior y mantener los registros organizados.",
+
+        solucion:
+          "SorteaPro permite gestionar rifas desde una aplicación móvil, facilitando la asignación de números aleatorios o personalizados, el registro de encargos, la consulta de números disponibles y la generación de documentos PDF.",
+
+        beneficio:
+          "Centraliza la información, agiliza la administración de las rifas y facilita el seguimiento de los registros, incluso sin conexión a internet.",
       },
 
       funcionalidades: [
@@ -339,29 +341,75 @@ export default function Proyectos() {
     },
 
     {
-      id: 4,
+      id: 3,
       tipo: "movil",
-      nombre: "Boletazo",
+      nombre: "SorteaPro",
+      resumen:
+        "Aplicación móvil para administrar rifas, generar números personalizados, controlar encargos y gestionar deudores.",
       imagen: logoboletazo,
 
       imagenes: [
-        boletazo9,
+        boletazo7,
+        boletazo1,
+        boletazo8,
         boletazo3,
+        boletazo5,
         boletazo4,
         boletazo2,
-        boletazo5,
-        boletazo1,
+      ],
+
+      descripcionesImagenes: [
+        {
+          titulo: "Inicio de sesión y autenticación",
+          descripcion:
+            "Acceso mediante correo electrónico y contraseña, con autenticación de usuarios a través de Firebase. Incluye registro de nuevas cuentas y recuperación de contraseña por correo electrónico. La conexión a internet es necesaria para estas funciones de autenticación.",
+        },
+        {
+          titulo: "Generación de boletas",
+          descripcion:
+            "Generación automática de números de 2, 3 y 4 cifras para la administración de rifas.",
+        },
+        {
+          titulo: "Números personalizados",
+          descripcion:
+            "Creación de números personalizados para adaptarse a las necesidades de cada sorteo.",
+        },
+        {
+          titulo: "Diseño de boletas",
+          descripcion:
+            "Personalización de los diseños de las boletas para presentar la información de cada rifa.",
+        },
+        {
+          titulo: "Gestión de deudores y abonos",
+          descripcion:
+            "Registro de personas con pagos pendientes y seguimiento de los abonos realizados.",
+        },
+        {
+          titulo: "Administración de encargos",
+          descripcion:
+            "Control de números encargados y seguimiento de las entregas pendientes.",
+        },
+        {
+          titulo: "Historial de números",
+          descripcion:
+            "Consulta y explora los registros anteriores mediante tarjetas que muestran el número, la lotería, el valor y la fecha de cada jugada.",
+        },
       ],
 
       descripcion:
-        "Boletazo es una aplicación móvil desarrollada para la gestión de rifas y boletas. Permite generar números automáticos o personalizados, administrar deudores y encargos, generar PDFs, consultar historiales y trabajar sin conexión a internet. Además, incorpora autenticación, PIN y huella digital para brindar mayor seguridad.",
+        "SorteaPro es una aplicación móvil desarrollada para la gestión de rifas y boletas. Permite generar números automáticos o personalizados, administrar deudores y encargos, generar PDFs, consultar historiales y trabajar sin conexión a internet. Además, incorpora autenticación, PIN y huella digital para brindar mayor seguridad.",
 
-      testimonio: {
-        titulo: "Opinión del cliente",
-        estrellas: 5,
-        comentario:
-          "Antes hacía todo en papel y muchas veces perdía listas o no recordaba quién me debía. Con Boletazo ahora tengo todo organizado, ahorro tiempo y puedo administrar mis rifas mucho más fácil.",
-        autor: "Cliente de Boletazo",
+      videoDemo: "/videos/sorteapro.mp4",
+
+      problemaSolucion: {
+        problema:
+          "La administración de rifas se realizaba mediante listas y registros en papel. La creación manual de números requería mucho tiempo y las hojas podían perderse, dificultando el control de los números asignados, los encargos y las personas que tenían pagos pendientes.",
+
+        solucion:
+          "Se desarrolló SorteaPro, una aplicación móvil que automatiza la generación de números y permite personalizar las boletas, organizar las rifas, registrar encargos y llevar un control de deudores y abonos. También incorpora almacenamiento local para consultar la información sin conexión a internet.",
+
+        beneficio:
+          "Reduce el tiempo dedicado a crear y organizar las boletas, centraliza los registros en un solo lugar y facilita el seguimiento de números, encargos y pagos pendientes. Además, permite consultar la información sin depender de documentos físicos.",
       },
 
       funcionalidades: [
@@ -397,8 +445,18 @@ export default function Proyectos() {
 
   return (
     <section id="proyectos" ref={ref}>
-      <h2 className={`titulo_proyect ${visible ? "show" : ""}`}>Proyectos</h2>
+      <div className={`encabezado-proyectos ${visible ? "show" : ""}`}>
+        <span className="proyectos-etiqueta">MI TRABAJO</span>
 
+        <h2 className="titulo_proyect">
+          Proyectos <span>destacados.</span>
+        </h2>
+
+        <p className="descripcion-proyectos">
+          Ideas convertidas en soluciones digitales funcionales, intuitivas y
+          eficientes.
+        </p>
+      </div>
       <div className="projects-grid">
         {proyectos.map((proyecto) => (
           <div
@@ -407,32 +465,60 @@ export default function Proyectos() {
               proyectoActivo?.id === proyecto.id ? "active" : ""
             }`}
             style={{ transitionDelay: `${proyecto.id * 0.15}s` }}
-            onClick={() => {
-              setIndexImagen(0);
-
-              const nuevoProyecto =
-                proyectoActivo?.id === proyecto.id ? null : proyecto;
-
-              setProyectoActivo(nuevoProyecto);
-
-              // RESET primero
-              setDetalleVisible(false);
-
-              setTimeout(() => {
-                setDetalleVisible(true);
-
-                detalleRef.current?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-              }, 120);
-            }}
           >
-            <img src={proyecto.imagen} alt={proyecto.nombre} />
+            <div className="project-image">
+              <img src={proyecto.imagen} alt={proyecto.nombre} />
 
-            <p className="project-tag">
-              {proyecto.id === 1 ? "🌐 Aplicación Web" : "📱 Aplicación Móvil"}
-            </p>
+              <span className="project-tag">
+                {proyecto.tipo === "web"
+                  ? "Aplicación Web"
+                  : "Aplicación Móvil"}
+              </span>
+            </div>
+
+            <div className="project-card-info">
+              <h3>{proyecto.nombre}</h3>
+
+              <p>{proyecto.resumen}</p>
+
+              <div className="project-card-tech">
+                {proyecto.tecnologias.slice(0, 4).map((tech, index) => (
+                  <span key={index}>{tech.nombre}</span>
+                ))}
+                {proyecto.tecnologias.length > 4 && (
+                  <span>+{proyecto.tecnologias.length - 4}</span>
+                )}
+              </div>
+
+              <button
+                className="btn-ver-proyecto"
+                onClick={() => {
+                  setIndexImagen(0);
+
+                  const nuevoProyecto =
+                    proyectoActivo?.id === proyecto.id ? null : proyecto;
+
+                  setProyectoActivo(nuevoProyecto);
+                  setDetalleVisible(false);
+
+                  if (nuevoProyecto) {
+                    setTimeout(() => {
+                      setDetalleVisible(true);
+
+                      detalleRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                    }, 120);
+                  }
+                }}
+              >
+                {proyectoActivo?.id === proyecto.id
+                  ? "Cerrar proyecto"
+                  : "Ver proyecto"}
+                <span> →</span>
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -440,9 +526,42 @@ export default function Proyectos() {
       {proyectoActivo && (
         <div
           key={proyectoActivo.id}
-          className="project-detail"
+          className={`project-detail ${detalleVisible ? "show" : ""}`}
           ref={detalleRef}
         >
+          {videoAbierto &&
+            videoActivo &&
+            createPortal(
+              <div
+                className="video-modal"
+                onClick={() => setVideoAbierto(false)}
+              >
+                <button
+                  className="video-close"
+                  onClick={() => setVideoAbierto(false)}
+                  aria-label="Cerrar video"
+                >
+                  ×
+                </button>
+
+                <div
+                  className="video-container"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <video
+                    key={videoActivo}
+                    src={videoActivo}
+                    controls
+                    autoPlay
+                    playsInline
+                  >
+                    Tu navegador no admite la reproducción de videos.
+                  </video>
+                </div>
+              </div>,
+              document.body
+            )}
+
           {/* IZQUIERDA */}
           <div className="project-info">
             <h2 className={`project-title ${detalleVisible ? "show" : ""}`}>
@@ -457,88 +576,229 @@ export default function Proyectos() {
                 <h3>Descripción</h3>
                 <p>{proyectoActivo.descripcion}</p>
               </div>
+
+              <div className="project-actions">
+                {proyectoActivo.videoDemo && (
+                  <button
+                    className="btn-demo"
+                    onClick={() => {
+                      setVideoActivo(proyectoActivo.videoDemo);
+                      setVideoAbierto(true);
+                    }}
+                  >
+                    ▶ Ver demostración
+                  </button>
+                )}
+
+                {proyectoActivo.repositorio && (
+                  <a
+                    href={proyectoActivo.repositorio}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-repositorio"
+                  >
+                    <span>⌘</span> Ver repositorio
+                  </a>
+                )}
+              </div>
               {/* DERECHA (CARRUSEL) */}
               <div
                 ref={carouselRef}
                 className={`project-carousel ${carouselVisible ? "show" : ""}`}
               >
-                <div
-                  className={`carousel-wrapper ${
-                    proyectoActivo.tipo === "movil"
-                      ? "mobile-frame"
-                      : "web-frame"
-                  }`}
-                >
-                  <button
-                    className="carousel-btn left"
-                    onClick={() =>
-                      setIndexImagen((prev) =>
-                        prev === 0
-                          ? proyectoActivo.imagenes.length - 1
-                          : prev - 1
-                      )
-                    }
-                  >
-                    ◀
-                  </button>
+                <div className="modern-project-gallery">
+                  {/* ENCABEZADO */}
+                  <div className="modern-gallery-heading">
+                    <div>
+                      <span>PORTAFOLIO VISUAL</span>
+                      <h3>Explora sus pantallas</h3>
+                      <p>Selecciona una imagen para conocer más detalles.</p>
+                    </div>
 
-                  <div className="carousel-stack">
-                    {proyectoActivo.imagenes.map((img, i) => {
-                      let position = i - indexImagen;
-
-                      if (position < -1)
-                        position = proyectoActivo.imagenes.length + position;
-                      if (position > 1)
-                        position = position - proyectoActivo.imagenes.length;
-
-                      return (
-                        <img
-                          key={i}
-                          src={img}
-                          className={`carousel-img pos-${position}`}
-                        />
-                      );
-                    })}
+                    <span className="gallery-total">
+                      {proyectoActivo.imagenes.length} pantallas
+                    </span>
                   </div>
 
-                  <button
-                    className="carousel-btn right"
-                    onClick={() =>
-                      setIndexImagen(
-                        (prev) => (prev + 1) % proyectoActivo.imagenes.length
-                      )
-                    }
+                  {/* GALERÍA ASIMÉTRICA */}
+                  <div
+                    className={`modern-gallery-grid gallery-${proyectoActivo.tipo}`}
                   >
-                    ▶
-                  </button>
-                </div>
-                <div className="carousel-dots">
-                  {proyectoActivo.imagenes.map((_, i) => (
-                    <span
-                      key={i}
-                      className={`dot ${i === indexImagen ? "active" : ""}`}
-                      onClick={() => setIndexImagen(i)}
-                    />
-                  ))}
+                    {proyectoActivo.imagenes.map((img, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        className={`modern-gallery-item gallery-position-${
+                          index + 1
+                        }`}
+                        style={{
+                          animationDelay: `${0.15 + index * 0.15}s`,
+                        }}
+                        onClick={() => {
+                          setIndexImagen(index);
+                          setVisorAbierto(true);
+                        }}
+                        aria-label={`Ver pantalla ${index + 1}`}
+                      >
+                        <div className="gallery-image-wrapper">
+                          <img
+                            src={img}
+                            alt={`${proyectoActivo.nombre} - Pantalla ${
+                              index + 1
+                            }`}
+                          />
+
+                          <div className="gallery-image-overlay">
+                            <span>VER PANTALLA ↗</span>
+                          </div>
+                        </div>
+
+                        <div className="gallery-item-info">
+                          <span>{String(index + 1).padStart(2, "0")}</span>
+
+                          <p>
+                            {proyectoActivo.descripcionesImagenes?.[index]
+                              ?.titulo || `Pantalla ${index + 1}`}
+                          </p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+
+                  {visorAbierto &&
+                    createPortal(
+                      <div
+                        className="gallery-lightbox"
+                        onClick={() => setVisorAbierto(false)}
+                      >
+                        <button
+                          type="button"
+                          className="lightbox-close"
+                          onClick={() => setVisorAbierto(false)}
+                          aria-label="Cerrar visor"
+                        >
+                          ×
+                        </button>
+
+                        <button
+                          type="button"
+                          className="lightbox-arrow lightbox-prev"
+                          onClick={(e) => {
+                            e.stopPropagation();
+
+                            setIndexImagen(
+                              (prev) =>
+                                (prev - 1 + proyectoActivo.imagenes.length) %
+                                proyectoActivo.imagenes.length
+                            );
+                          }}
+                          aria-label="Imagen anterior"
+                        >
+                          ‹
+                        </button>
+
+                        <div
+                          className="lightbox-content"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div className="lightbox-image-container">
+                            <img
+                              src={proyectoActivo.imagenes[indexImagen]}
+                              alt={`${proyectoActivo.nombre} - Pantalla ${
+                                indexImagen + 1
+                              }`}
+                            />
+                          </div>
+
+                          <div className="lightbox-description">
+                            <span className="lightbox-label">
+                              VISTA DEL PROYECTO
+                            </span>
+
+                            <h3>
+                              {proyectoActivo.descripcionesImagenes?.[
+                                indexImagen
+                              ]?.titulo || `Pantalla ${indexImagen + 1}`}
+                            </h3>
+
+                            <p>
+                              {proyectoActivo.descripcionesImagenes?.[
+                                indexImagen
+                              ]?.descripcion ||
+                                `Vista de ${proyectoActivo.nombre}. Esta pantalla forma parte de las funcionalidades de la aplicación.`}
+                            </p>
+
+                            <span className="lightbox-counter">
+                              {String(indexImagen + 1).padStart(2, "0")} /{" "}
+                              {String(proyectoActivo.imagenes.length).padStart(
+                                2,
+                                "0"
+                              )}
+                            </span>
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          className="lightbox-arrow lightbox-next"
+                          onClick={(e) => {
+                            e.stopPropagation();
+
+                            setIndexImagen(
+                              (prev) =>
+                                (prev + 1) % proyectoActivo.imagenes.length
+                            );
+                          }}
+                          aria-label="Imagen siguiente"
+                        >
+                          ›
+                        </button>
+                      </div>,
+
+                      document.body
+                    )}
                 </div>
               </div>
             </div>
 
-            {proyectoActivo.testimonio && (
-              <div
+            {proyectoActivo.problemaSolucion && (
+              <section
                 ref={testimonialRef}
-                className={`testimonial ${testimonialVisible ? "show" : ""}`}
+                className={`problem-solution ${
+                  testimonialVisible ? "show" : ""
+                }`}
               >
-                <h4>{proyectoActivo.testimonio.titulo}</h4>
-
-                <div className="stars">
-                  {"★".repeat(proyectoActivo.testimonio.estrellas)}
+                <div className="problem-header">
+                  <span className="section-subtitle">
+                    EL VALOR DEL PROYECTO
+                  </span>
+                  <h3>Problema y solución</h3>
+                  <p>
+                    Una solución tecnológica diseñada para responder a
+                    necesidades reales.
+                  </p>
                 </div>
 
-                <p>"{proyectoActivo.testimonio.comentario}"</p>
+                <div className="problem-grid">
+                  <article className="problem-card">
+                    <div className="problem-icon">⚠</div>
+                    <h4>El problema</h4>
+                    <p>{proyectoActivo.problemaSolucion.problema}</p>
+                  </article>
 
-                <span>— {proyectoActivo.testimonio.autor}</span>
-              </div>
+                  <article className="problem-card">
+                    <div className="problem-icon">💡</div>
+                    <h4>La solución</h4>
+                    <p>{proyectoActivo.problemaSolucion.solucion}</p>
+                  </article>
+
+                  <article className="problem-card">
+                    <div className="problem-icon">✓</div>
+                    <h4>El valor que aporta</h4>
+                    <p>{proyectoActivo.problemaSolucion.beneficio}</p>
+                  </article>
+                </div>
+              </section>
             )}
 
             <h4 className={`subtitulo ${featuresVisible ? "show" : ""}`}>
@@ -567,7 +827,7 @@ export default function Proyectos() {
               {proyectoActivo.tecnologias.map((tech, index) => (
                 <div
                   key={index}
-                  className={`tech-pill ${visible ? "show" : ""}`}
+                  className={`tech-pill ${techVisible ? "show" : ""}`}
                   style={{ transitionDelay: `${index * 0.08}s` }}
                 >
                   <img src={tech.icono} alt={tech.nombre} />
