@@ -105,6 +105,23 @@ export default function Proyectos() {
   }, [proyectoActivo]);
 
   useEffect(() => {
+    const elemento = carouselRef.current;
+
+    if (!elemento) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setCarouselVisible(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(elemento);
+
+    return () => observer.disconnect();
+  }, [proyectoActivo]);
+
+  useEffect(() => {
     // reset animaciones cada vez que cambia el proyecto
     setDetalleVisible(false);
     setDescVisible(false);
