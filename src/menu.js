@@ -16,8 +16,8 @@ export default function Navbar() {
       <div className={`nav-links ${menuAbierto ? "active" : ""}`}>
         <a href="#inicio">Inicio</a>
         <a href="#sobre-mi">Sobre mí</a>
-        <a href="#tecnologias">Tecnologías</a>
         <a href="#certificaciones">Certificaciones</a>
+        <a href="#tecnologias">Tecnologías</a>
         <a href="#proyectos">Proyectos</a>
         <a href="#contacto">Contacto</a>
       </div>
