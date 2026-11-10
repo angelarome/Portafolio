@@ -66,7 +66,7 @@ export default function SobreMi() {
             Soy Tecnóloga en Desarrollo de Software, graduada de la Universidad del Valle. Cuento con experiencia práctica en el desarrollo de aplicaciones móviles y plataformas web, participando en la creación de soluciones tecnológicas orientadas a necesidades reales.
           </p>
           <p>
-            He trabajado en proyectos independientes y profesionales, abordando diferentes etapas del desarrollo de software: análisis de requerimientos, desarrollo frontend y backend, integración de APIs, gestión de bases de datos e implementación de funcionalidades.
+            He trabajado en proyectos independientes y profesionales, abordando diferentes etapas del desarrollo de software: análisis de requerimientos, desarrollo frontend y backend, integración de APIs, gestión de bases de datos e implementación de funcionalidades. Además, he aplicado metodologías ágiles como Scrum y Kanban para la planificación, organización y seguimiento de actividades durante el desarrollo de proyectos.
           </p>
 
           <p>

@@ -160,7 +160,7 @@ export default function Proyectos() {
       tipo: "web",
       nombre: "Heliconias Report",
       resumen:
-        "Plataforma web para gestionar visitantes, consultar estadísticas y generar informes automáticamente.",
+        "Plataforma web para gestionar visitantes, consultar estadísticas y generar informes automáticamente, desarrollada mediante trabajo colaborativo y metodologías ágiles Scrum y Kanban.",
       imagen: logoheliconias,
 
       imagenes: [heliconia3, heliconia2, heliconias],
@@ -224,7 +224,7 @@ export default function Proyectos() {
       tipo: "movil",
       nombre: "CobroPro",
       resumen:
-        "Solución móvil para gestionar negocios, equipos de trabajo, clientes, cobranzas y rutas mediante mapas inteligentes y sincronización en la nube.",
+        "Solución móvil para gestionar negocios, equipos de trabajo, clientes, cobranzas y rutas mediante mapas inteligentes y sincronización en la nube, aplicando metodologías ágiles Scrum y Kanban durante su desarrollo.",
       imagen: prestaappro,
 
       imagenes: [
@@ -362,7 +362,7 @@ export default function Proyectos() {
       tipo: "movil",
       nombre: "SorteaPro",
       resumen:
-        "Aplicación móvil para administrar rifas, generar números personalizados, controlar encargos y gestionar deudores.",
+        "Aplicación móvil para administrar rifas, generar números personalizados, controlar encargos y gestionar deudores, desarrollada aplicando metodologías ágiles Scrum y Kanban.",
       imagen: logoboletazo,
 
       imagenes: [
