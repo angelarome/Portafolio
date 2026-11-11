@@ -1,6 +1,6 @@
 import "./styles.css";
 import { useState } from "react";
-import logo from "./assets/logo.png";
+import logo from "./assets/angelaromeroo.png";
 
 export default function Navbar() {
   const [menuAbierto, setMenuAbierto] = useState(false);

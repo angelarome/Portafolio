@@ -1,4 +1,4 @@
-import logo from "../assets/logo.png";
+import logo from "../assets/angelaromeroo.png";
 import "./SplashScreen.css";
 
 function SplashScreen({ fadeOut }) {
